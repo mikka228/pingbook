@@ -14,7 +14,6 @@
       --text: #f4f4f5;
       --muted: #a1a1aa;
       --accent: #22d3ee;
-      --accent2: #a78bfa;
       --danger: #f87171;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -25,253 +24,126 @@
       min-height: 100vh;
       line-height: 1.5;
     }
-    .app {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 0 16px 100px;
-    }
+    .app { max-width: 480px; margin: 0 auto; padding: 0 16px 110px; }
     header {
       padding: calc(16px + env(safe-area-inset-top)) 0 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
     }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+    .brand { display: flex; align-items: center; gap: 10px; }
     .logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
+      width: 40px; height: 40px; border-radius: 12px;
       background: linear-gradient(135deg, #22d3ee, #a78bfa);
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      color: #0a0a0b;
+      display: grid; place-items: center; font-weight: 800; color: #0a0a0b;
     }
-    .brand h1 {
-      font-size: 1.15rem;
-      letter-spacing: -0.03em;
-    }
-    .brand p {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .search {
-      margin: 8px 0 16px;
-    }
+    .brand h1 { font-size: 1.15rem; letter-spacing: -0.03em; }
+    .brand p { font-size: 0.75rem; color: var(--muted); }
+    .search { margin: 8px 0 16px; }
     .search input {
-      width: 100%;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px 14px;
-      color: var(--text);
-      font-size: 1rem;
-      outline: none;
+      width: 100%; background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 12px 14px; color: var(--text); font-size: 1rem; outline: none;
     }
-    .search input:focus {
-      border-color: var(--accent);
-    }
+    .search input:focus { border-color: var(--accent); }
     .section-title {
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 8px 0 10px;
-      font-weight: 700;
+      font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); margin: 8px 0 10px; font-weight: 700;
     }
-    .list {
-      display: grid;
-      gap: 8px;
-    }
+    .list { display: grid; gap: 8px; }
     .contact {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 12px 14px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      cursor: pointer;
-      transition: border-color 0.15s, background 0.15s;
-    }
-    .contact:hover {
-      border-color: #3f3f46;
-      background: var(--card2);
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 12px 14px; display: flex; align-items: center; gap: 12px;
     }
     .avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
+      width: 44px; height: 44px; border-radius: 14px;
       background: linear-gradient(145deg, #1f2937, #312e81);
-      display: grid;
-      place-items: center;
-      font-weight: 700;
-      color: #e0e7ff;
-      flex: none;
+      display: grid; place-items: center; font-weight: 700; color: #e0e7ff; flex: none;
     }
-    .info { flex: 1; min-width: 0; }
+    .info { flex: 1; min-width: 0; cursor: pointer; }
     .name {
-      font-weight: 650;
-      font-size: 0.98rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      font-weight: 650; font-size: 0.98rem;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
     .meta {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 2px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      font-size: 0.8rem; color: var(--muted); margin-top: 2px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
-    .channel {
-      font-size: 0.72rem;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: #ffffff10;
-      color: var(--accent);
-      flex: none;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      font-weight: 700;
+    .msg-btn {
+      border: none; border-radius: 12px; padding: 8px 12px;
+      background: linear-gradient(135deg, #22d3ee, #818cf8);
+      color: #0a0a0b; font-weight: 700; font-size: 0.8rem; cursor: pointer; flex: none;
+    }
+    .channel-tag {
+      font-size: 0.7rem; color: var(--accent); margin-top: 2px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.04em;
     }
     .empty {
-      text-align: center;
-      padding: 40px 16px;
-      color: var(--muted);
-      border: 1px dashed var(--border);
-      border-radius: 18px;
+      text-align: center; padding: 40px 16px; color: var(--muted);
+      border: 1px dashed var(--border); border-radius: 18px;
     }
-    .empty strong {
-      display: block;
-      color: var(--text);
-      margin-bottom: 6px;
-      font-size: 1.05rem;
-    }
+    .empty strong { display: block; color: var(--text); margin-bottom: 6px; font-size: 1.05rem; }
     .fab {
-      position: fixed;
-      right: max(16px, calc(50% - 240px + 16px));
+      position: fixed; right: max(16px, calc(50% - 240px + 16px));
       bottom: calc(20px + env(safe-area-inset-bottom));
-      width: 58px;
-      height: 58px;
-      border: none;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #22d3ee, #818cf8);
-      color: #0a0a0b;
-      font-size: 1.8rem;
-      font-weight: 700;
-      box-shadow: 0 12px 30px rgba(34, 211, 238, 0.25);
-      cursor: pointer;
+      width: 58px; height: 58px; border: none; border-radius: 18px;
+      background: linear-gradient(135deg, #22d3ee, #818cf8); color: #0a0a0b;
+      font-size: 1.8rem; font-weight: 700; box-shadow: 0 12px 30px rgba(34,211,238,.25); cursor: pointer;
     }
     .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.65);
-      backdrop-filter: blur(8px);
-      display: none;
-      align-items: flex-end;
-      justify-content: center;
-      padding: 12px;
-      z-index: 50;
+      position: fixed; inset: 0; background: rgba(0,0,0,.65); backdrop-filter: blur(8px);
+      display: none; align-items: flex-end; justify-content: center; padding: 12px; z-index: 50;
     }
     .modal.show { display: flex; }
     .sheet {
-      width: 100%;
-      max-width: 480px;
-      max-height: 90dvh;
-      overflow: auto;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 18px;
+      width: 100%; max-width: 480px; max-height: 92dvh; overflow: auto;
+      background: var(--card); border: 1px solid var(--border); border-radius: 22px; padding: 18px;
     }
     .sheet-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
     }
-    .sheet-head h2 {
-      font-size: 1.15rem;
-      letter-spacing: -0.02em;
-    }
+    .sheet-head h2 { font-size: 1.15rem; letter-spacing: -0.02em; }
     .close {
-      width: 36px;
-      height: 36px;
-      border: none;
-      border-radius: 12px;
-      background: #ffffff12;
-      color: var(--text);
-      font-size: 1.2rem;
-      cursor: pointer;
+      width: 36px; height: 36px; border: none; border-radius: 12px;
+      background: #ffffff12; color: var(--text); font-size: 1.2rem; cursor: pointer;
     }
     label {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin: 10px 0 6px;
-      font-weight: 600;
+      display: block; font-size: 0.8rem; color: var(--muted); margin: 10px 0 6px; font-weight: 600;
     }
     input, select, textarea {
-      width: 100%;
-      background: #0a0a0b;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 11px 12px;
-      color: var(--text);
-      font-size: 0.95rem;
-      outline: none;
+      width: 100%; background: #0a0a0b; border: 1px solid var(--border);
+      border-radius: 12px; padding: 11px 12px; color: var(--text); font-size: 0.95rem; outline: none;
     }
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--accent);
-    }
-    textarea { min-height: 80px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+    textarea { min-height: 110px; resize: vertical; }
     .btn {
-      width: 100%;
-      margin-top: 16px;
-      border: none;
-      border-radius: 14px;
-      padding: 13px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      background: linear-gradient(135deg, #22d3ee, #818cf8);
-      color: #0a0a0b;
+      width: 100%; margin-top: 14px; border: none; border-radius: 14px; padding: 13px;
+      font-weight: 700; font-size: 1rem; cursor: pointer;
+      background: linear-gradient(135deg, #22d3ee, #818cf8); color: #0a0a0b;
     }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-secondary {
+      background: transparent; border: 1px solid var(--border); color: var(--text); margin-top: 8px;
+    }
     .btn-danger {
-      background: transparent;
-      border: 1px solid #7f1d1d;
-      color: var(--danger);
-      margin-top: 8px;
+      background: transparent; border: 1px solid #7f1d1d; color: var(--danger); margin-top: 8px;
     }
+    .templates { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .chip {
+      border: 1px solid var(--border); background: #ffffff0a; color: var(--text);
+      border-radius: 999px; padding: 7px 11px; font-size: 0.8rem; cursor: pointer;
+    }
+    .chip:hover { border-color: var(--accent); }
+    .to-line {
+      background: #0a0a0b; border: 1px solid var(--border); border-radius: 12px;
+      padding: 12px; margin-bottom: 4px;
+    }
+    .to-line strong { display: block; font-size: 0.95rem; }
+    .to-line span { font-size: 0.8rem; color: var(--muted); }
+    .hint { font-size: 0.8rem; color: var(--muted); margin-top: 8px; }
     .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 90px;
-      transform: translateX(-50%);
-      background: #1f2937;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      display: none;
-      z-index: 60;
+      position: fixed; left: 50%; bottom: 90px; transform: translateX(-50%);
+      background: #1f2937; border: 1px solid var(--border); color: var(--text);
+      padding: 10px 14px; border-radius: 12px; font-size: 0.85rem; display: none; z-index: 60;
       max-width: calc(100% - 32px);
     }
     .toast.show { display: block; }
-    .hint {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 8px;
-    }
   </style>
 </head>
 <body>
@@ -296,6 +168,7 @@
 
   <button class="fab" id="addBtn" title="Add contact">+</button>
 
+  <!-- Add / Edit contact -->
   <div class="modal" id="modal">
     <div class="sheet">
       <div class="sheet-head">
@@ -314,16 +187,44 @@
         <option value="email">Email</option>
       </select>
 
-      <label for="handle" id="handleLabel">Phone or WhatsApp number</label>
+      <label for="handle" id="handleLabel">WhatsApp number</label>
       <input id="handle" placeholder="+1234567890" />
 
       <label for="note">Note (optional)</label>
-      <textarea id="note" placeholder="Met at conference, prefers short messages..."></textarea>
-
+      <textarea id="note" placeholder="Prefers short messages..."></textarea>
       <p class="hint" id="hint">Use full international phone number for WhatsApp/SMS.</p>
 
       <button class="btn" id="saveBtn">Save contact</button>
       <button class="btn btn-danger" id="deleteBtn" style="display:none">Delete</button>
+    </div>
+  </div>
+
+  <!-- Compose message -->
+  <div class="modal" id="composeModal">
+    <div class="sheet">
+      <div class="sheet-head">
+        <h2>Message</h2>
+        <button class="close" id="composeClose">×</button>
+      </div>
+
+      <div class="to-line">
+        <strong id="composeName">Contact</strong>
+        <span id="composeMeta">channel</span>
+      </div>
+
+      <label for="message">Message</label>
+      <textarea id="message" placeholder="Write your message..."></textarea>
+
+      <div class="section-title" style="margin-top:14px">Quick templates</div>
+      <div class="templates">
+        <button class="chip" data-t="Hi! Just wanted to follow up.">Follow-up</button>
+        <button class="chip" data-t="Thanks a lot!">Thanks</button>
+        <button class="chip" data-t="Are you free for a quick call this week?">Call?</button>
+        <button class="chip" data-t="I've arrived, all good.">Arrived</button>
+      </div>
+
+      <button class="btn" id="sendBtn">Open messenger</button>
+      <button class="btn btn-secondary" id="copyMsgBtn">Copy message</button>
     </div>
   </div>
 
@@ -332,18 +233,16 @@
   <script>
     const $ = id => document.getElementById(id);
     const STORAGE_KEY = 'reach_contacts_v1';
-
     let editingId = null;
+    let composeContact = null;
 
     function load() {
       try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
       catch { return []; }
     }
-
     function save(list) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
     }
-
     function toast(msg) {
       const el = $('toast');
       el.textContent = msg;
@@ -351,47 +250,62 @@
       clearTimeout(toast._t);
       toast._t = setTimeout(() => el.classList.remove('show'), 2200);
     }
-
     function initials(name) {
-      return (name || '?')
-        .split(/\s+/)
-        .filter(Boolean)
-        .slice(0, 2)
-        .map(w => w[0].toUpperCase())
-        .join('') || '?';
+      return (name || '?').split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join('') || '?';
     }
-
     function channelLabel(c) {
-      return ({
-        whatsapp: 'WA',
-        telegram: 'TG',
-        sms: 'SMS',
-        email: 'Mail'
-      })[c] || c;
+      return ({ whatsapp: 'WhatsApp', telegram: 'Telegram', sms: 'SMS', email: 'Email' })[c] || c;
+    }
+    function cleanPhone(v) {
+      return String(v || '').replace(/[^\d+]/g, '').replace(/(?!^)\+/g, '');
+    }
+    function cleanTelegram(v) {
+      return String(v || '').trim().replace(/^@/, '');
     }
 
-    function handlePlaceholder(channel) {
-      if (channel === 'whatsapp' || channel === 'sms') return '+1234567890';
-      if (channel === 'telegram') return '@username or phone';
-      if (channel === 'email') return 'name@email.com';
-      return '';
+    function buildLink(contact, text) {
+      const channel = contact.channel;
+      const handle = contact.handle || '';
+      const msg = text || '';
+
+      if (channel === 'whatsapp') {
+        const phone = cleanPhone(handle).replace(/^\+/, '');
+        return 'https://wa.me/' + phone + (msg ? '?text=' + encodeURIComponent(msg) : '');
+      }
+      if (channel === 'telegram') {
+        const user = cleanTelegram(handle);
+        // username opens chat; text can't always be prefilled cross-platform
+        if (/^\+?\d{6,}$/.test(user)) {
+          return 'https://t.me/+' + user.replace(/^\+/, '');
+        }
+        return 'https://t.me/' + user;
+      }
+      if (channel === 'sms') {
+        const phone = cleanPhone(handle);
+        return 'sms:' + phone + (msg ? '?body=' + encodeURIComponent(msg) : '');
+      }
+      if (channel === 'email') {
+        return 'mailto:' + handle + (msg ? '?body=' + encodeURIComponent(msg) : '');
+      }
+      return null;
     }
 
     function handleLabel(channel) {
       if (channel === 'whatsapp') return 'WhatsApp number';
       if (channel === 'telegram') return 'Telegram username or phone';
       if (channel === 'sms') return 'Phone number';
-      if (channel === 'email') return 'Email address';
-      return 'Contact handle';
+      return 'Email address';
     }
-
+    function handlePlaceholder(channel) {
+      if (channel === 'whatsapp' || channel === 'sms') return '+1234567890';
+      if (channel === 'telegram') return '@username';
+      return 'name@email.com';
+    }
     function handleHint(channel) {
       if (channel === 'whatsapp' || channel === 'sms') return 'Use full international number, e.g. +1234567890';
-      if (channel === 'telegram') return 'Username without spaces, or phone number';
-      if (channel === 'email') return 'Full email address';
-      return '';
+      if (channel === 'telegram') return 'Username without @, or phone number';
+      return 'Full email address';
     }
-
     function updateChannelUI() {
       const channel = $('channel').value;
       $('handleLabel').textContent = handleLabel(channel);
@@ -414,11 +328,7 @@
       box.innerHTML = '';
 
       if (!list.length) {
-        box.innerHTML = `
-          <div class="empty">
-            <strong>${q ? 'No matches' : 'No contacts yet'}</strong>
-            ${q ? 'Try another search.' : 'Tap + to add your first contact.'}
-          </div>`;
+        box.innerHTML = `<div class="empty"><strong>\( {q ? 'No matches' : 'No contacts yet'}</strong> \){q ? 'Try another search.' : 'Tap + to add your first contact.'}</div>`;
         return;
       }
 
@@ -430,12 +340,18 @@
           <div class="info">
             <div class="name"></div>
             <div class="meta"></div>
+            <div class="channel-tag"></div>
           </div>
-          <div class="channel">${channelLabel(c.channel)}</div>
+          <button class="msg-btn" type="button">Message</button>
         `;
         row.querySelector('.name').textContent = c.name;
         row.querySelector('.meta').textContent = c.handle + (c.note ? ' · ' + c.note : '');
-        row.onclick = () => openEdit(c.id);
+        row.querySelector('.channel-tag').textContent = channelLabel(c.channel);
+        row.querySelector('.info').onclick = () => openEdit(c.id);
+        row.querySelector('.msg-btn').onclick = (e) => {
+          e.stopPropagation();
+          openCompose(c.id);
+        };
         box.appendChild(row);
       });
     }
@@ -477,36 +393,21 @@
       const channel = $('channel').value;
       const handle = $('handle').value.trim();
       const note = $('note').value.trim();
-
-      if (!name) {
-        toast('Enter a name');
-        return;
-      }
-      if (!handle) {
-        toast('Enter a contact handle');
-        return;
-      }
+      if (!name) return toast('Enter a name');
+      if (!handle) return toast('Enter a contact handle');
 
       const list = load();
       if (editingId) {
         const i = list.findIndex(x => x.id === editingId);
-        if (i >= 0) {
-          list[i] = { ...list[i], name, channel, handle, note, updatedAt: Date.now() };
-        }
+        if (i >= 0) list[i] = { ...list[i], name, channel, handle, note, updatedAt: Date.now() };
         toast('Contact updated');
       } else {
         list.unshift({
-          id: Date.now(),
-          name,
-          channel,
-          handle,
-          note,
-          createdAt: Date.now(),
-          updatedAt: Date.now()
+          id: Date.now(), name, channel, handle, note,
+          createdAt: Date.now(), updatedAt: Date.now()
         });
         toast('Contact saved');
       }
-
       save(list);
       closeModal();
       render();
@@ -521,15 +422,71 @@
       render();
     }
 
+    function openCompose(id) {
+      const c = load().find(x => x.id === id);
+      if (!c) return;
+      composeContact = c;
+      $('composeName').textContent = c.name;
+      $('composeMeta').textContent = channelLabel(c.channel) + ' · ' + c.handle;
+      $('message').value = '';
+      $('composeModal').classList.add('show');
+      setTimeout(() => $('message').focus(), 50);
+    }
+
+    function closeCompose() {
+      $('composeModal').classList.remove('show');
+      composeContact = null;
+    }
+
+    function sendMessage() {
+      if (!composeContact) return;
+      const text = $('message').value.trim();
+      const link = buildLink(composeContact, text);
+      if (!link) return toast('Could not build link');
+
+      // For Telegram, copy text because prefill is unreliable
+      if (composeContact.channel === 'telegram' && text) {
+        navigator.clipboard.writeText(text).then(() => {
+          toast('Message copied — paste in Telegram');
+          window.open(link, '_blank');
+        }).catch(() => window.open(link, '_blank'));
+        return;
+      }
+
+      window.open(link, '_blank');
+    }
+
+    function copyMessage() {
+      const text = $('message').value.trim();
+      if (!text) return toast('Nothing to copy');
+      navigator.clipboard.writeText(text).then(() => toast('Message copied'));
+    }
+
+    // events
     $('addBtn').onclick = openAdd;
     $('closeBtn').onclick = closeModal;
     $('saveBtn').onclick = saveContact;
     $('deleteBtn').onclick = deleteContact;
     $('channel').onchange = updateChannelUI;
     $('search').oninput = render;
-    $('modal').onclick = (e) => { if (e.target === $('modal')) closeModal(); };
+    $('modal').onclick = e => { if (e.target === $('modal')) closeModal(); };
+    $('composeClose').onclick = closeCompose;
+    $('composeModal').onclick = e => { if (e.target === $('composeModal')) closeCompose(); };
+    $('sendBtn').onclick = sendMessage;
+    $('copyMsgBtn').onclick = copyMessage;
+
+    document.querySelectorAll('.chip').forEach(chip => {
+      chip.onclick = () => {
+        $('message').value = chip.getAttribute('data-t');
+        $('message').focus();
+      };
+    });
+
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Escape') {
+        closeModal();
+        closeCompose();
+      }
     });
 
     updateChannelUI();

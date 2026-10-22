@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0b" />
+  <title>Reach — Message the right way</title>
+  <style>
+    :root {
+      --bg: #0a0a0b;
+      --card: #141416;
+      --card2: #1a1a1e;
+      --border: #2a2a30;
+      --text: #f4f4f5;
+      --muted: #a1a1aa;
+      --accent: #22d3ee;
+      --accent2: #a78bfa;
+      --danger: #f87171;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    .app {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 16px 100px;
+    }
+    header {
+      padding: calc(16px + env(safe-area-inset-top)) 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #22d3ee, #a78bfa);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: #0a0a0b;
+    }
+    .brand h1 {
+      font-size: 1.15rem;
+      letter-spacing: -0.03em;
+    }
+    .brand p {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .search {
+      margin: 8px 0 16px;
+    }
+    .search input {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+    }
+    .search input:focus {
+      border-color: var(--accent);
+    }
+    .section-title {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 8px 0 10px;
+      font-weight: 700;
+    }
+    .list {
+      display: grid;
+      gap: 8px;
+    }
+    .contact {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .contact:hover {
+      border-color: #3f3f46;
+      background: var(--card2);
+    }
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #1f2937, #312e81);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: #e0e7ff;
+      flex: none;
+    }
+    .info { flex: 1; min-width: 0; }
+    .name {
+      font-weight: 650;
+      font-size: 0.98rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .channel {
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #ffffff10;
+      color: var(--accent);
+      flex: none;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+    .empty {
+      text-align: center;
+      padding: 40px 16px;
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: 18px;
+    }
+    .empty strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 6px;
+      font-size: 1.05rem;
+    }
+    .fab {
+      position: fixed;
+      right: max(16px, calc(50% - 240px + 16px));
+      bottom: calc(20px + env(safe-area-inset-bottom));
+      width: 58px;
+      height: 58px;
+      border: none;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #22d3ee, #818cf8);
+      color: #0a0a0b;
+      font-size: 1.8rem;
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(34, 211, 238, 0.25);
+      cursor: pointer;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 12px;
+      z-index: 50;
+    }
+    .modal.show { display: flex; }
+    .sheet {
+      width: 100%;
+      max-width: 480px;
+      max-height: 90dvh;
+      overflow: auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 18px;
+    }
+    .sheet-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .sheet-head h2 {
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .close {
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 12px;
+      background: #ffffff12;
+      color: var(--text);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 10px 0 6px;
+      font-weight: 600;
+    }
+    input, select, textarea {
+      width: 100%;
+      background: #0a0a0b;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 12px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+    }
+    textarea { min-height: 80px; resize: vertical; }
+    .btn {
+      width: 100%;
+      margin-top: 16px;
+      border: none;
+      border-radius: 14px;
+      padding: 13px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      background: linear-gradient(135deg, #22d3ee, #818cf8);
+      color: #0a0a0b;
+    }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-danger {
+      background: transparent;
+      border: 1px solid #7f1d1d;
+      color: var(--danger);
+      margin-top: 8px;
+    }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 90px;
+      transform: translateX(-50%);
+      background: #1f2937;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      display: none;
+      z-index: 60;
+      max-width: calc(100% - 32px);
+    }
+    .toast.show { display: block; }
+    .hint {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <div class="logo">R</div>
+        <div>
+          <h1>Reach</h1>
+          <p>Message the right way</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="search">
+      <input id="search" type="search" placeholder="Search contacts..." />
+    </div>
+
+    <div class="section-title">Contacts</div>
+    <div id="list" class="list"></div>
+  </div>
+
+  <button class="fab" id="addBtn" title="Add contact">+</button>
+
+  <div class="modal" id="modal">
+    <div class="sheet">
+      <div class="sheet-head">
+        <h2 id="modalTitle">Add contact</h2>
+        <button class="close" id="closeBtn">×</button>
+      </div>
+
+      <label for="name">Name</label>
+      <input id="name" placeholder="Alex Johnson" />
+
+      <label for="channel">Preferred channel</label>
+      <select id="channel">
+        <option value="whatsapp">WhatsApp</option>
+        <option value="telegram">Telegram</option>
+        <option value="sms">SMS</option>
+        <option value="email">Email</option>
+      </select>
+
+      <label for="handle" id="handleLabel">Phone or WhatsApp number</label>
+      <input id="handle" placeholder="+1234567890" />
+
+      <label for="note">Note (optional)</label>
+      <textarea id="note" placeholder="Met at conference, prefers short messages..."></textarea>
+
+      <p class="hint" id="hint">Use full international phone number for WhatsApp/SMS.</p>
+
+      <button class="btn" id="saveBtn">Save contact</button>
+      <button class="btn btn-danger" id="deleteBtn" style="display:none">Delete</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const $ = id => document.getElementById(id);
+    const STORAGE_KEY = 'reach_contacts_v1';
+
+    let editingId = null;
+
+    function load() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+      catch { return []; }
+    }
+
+    function save(list) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }
+
+    function toast(msg) {
+      const el = $('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => el.classList.remove('show'), 2200);
+    }
+
+    function initials(name) {
+      return (name || '?')
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map(w => w[0].toUpperCase())
+        .join('') || '?';
+    }
+
+    function channelLabel(c) {
+      return ({
+        whatsapp: 'WA',
+        telegram: 'TG',
+        sms: 'SMS',
+        email: 'Mail'
+      })[c] || c;
+    }
+
+    function handlePlaceholder(channel) {
+      if (channel === 'whatsapp' || channel === 'sms') return '+1234567890';
+      if (channel === 'telegram') return '@username or phone';
+      if (channel === 'email') return 'name@email.com';
+      return '';
+    }
+
+    function handleLabel(channel) {
+      if (channel === 'whatsapp') return 'WhatsApp number';
+      if (channel === 'telegram') return 'Telegram username or phone';
+      if (channel === 'sms') return 'Phone number';
+      if (channel === 'email') return 'Email address';
+      return 'Contact handle';
+    }
+
+    function handleHint(channel) {
+      if (channel === 'whatsapp' || channel === 'sms') return 'Use full international number, e.g. +1234567890';
+      if (channel === 'telegram') return 'Username without spaces, or phone number';
+      if (channel === 'email') return 'Full email address';
+      return '';
+    }
+
+    function updateChannelUI() {
+      const channel = $('channel').value;
+      $('handleLabel').textContent = handleLabel(channel);
+      $('handle').placeholder = handlePlaceholder(channel);
+      $('hint').textContent = handleHint(channel);
+    }
+
+    function render() {
+      const q = ($('search').value || '').trim().toLowerCase();
+      let list = load().sort((a, b) => a.name.localeCompare(b.name));
+      if (q) {
+        list = list.filter(c =>
+          (c.name || '').toLowerCase().includes(q) ||
+          (c.handle || '').toLowerCase().includes(q) ||
+          (c.note || '').toLowerCase().includes(q)
+        );
+      }
+
+      const box = $('list');
+      box.innerHTML = '';
+
+      if (!list.length) {
+        box.innerHTML = `
+          <div class="empty">
+            <strong>${q ? 'No matches' : 'No contacts yet'}</strong>
+            ${q ? 'Try another search.' : 'Tap + to add your first contact.'}
+          </div>`;
+        return;
+      }
+
+      list.forEach(c => {
+        const row = document.createElement('div');
+        row.className = 'contact';
+        row.innerHTML = `
+          <div class="avatar">${initials(c.name)}</div>
+          <div class="info">
+            <div class="name"></div>
+            <div class="meta"></div>
+          </div>
+          <div class="channel">${channelLabel(c.channel)}</div>
+        `;
+        row.querySelector('.name').textContent = c.name;
+        row.querySelector('.meta').textContent = c.handle + (c.note ? ' · ' + c.note : '');
+        row.onclick = () => openEdit(c.id);
+        box.appendChild(row);
+      });
+    }
+
+    function openAdd() {
+      editingId = null;
+      $('modalTitle').textContent = 'Add contact';
+      $('name').value = '';
+      $('channel').value = 'whatsapp';
+      $('handle').value = '';
+      $('note').value = '';
+      $('deleteBtn').style.display = 'none';
+      updateChannelUI();
+      $('modal').classList.add('show');
+      setTimeout(() => $('name').focus(), 50);
+    }
+
+    function openEdit(id) {
+      const c = load().find(x => x.id === id);
+      if (!c) return;
+      editingId = id;
+      $('modalTitle').textContent = 'Edit contact';
+      $('name').value = c.name || '';
+      $('channel').value = c.channel || 'whatsapp';
+      $('handle').value = c.handle || '';
+      $('note').value = c.note || '';
+      $('deleteBtn').style.display = 'block';
+      updateChannelUI();
+      $('modal').classList.add('show');
+    }
+
+    function closeModal() {
+      $('modal').classList.remove('show');
+      editingId = null;
+    }
+
+    function saveContact() {
+      const name = $('name').value.trim();
+      const channel = $('channel').value;
+      const handle = $('handle').value.trim();
+      const note = $('note').value.trim();
+
+      if (!name) {
+        toast('Enter a name');
+        return;
+      }
+      if (!handle) {
+        toast('Enter a contact handle');
+        return;
+      }
+
+      const list = load();
+      if (editingId) {
+        const i = list.findIndex(x => x.id === editingId);
+        if (i >= 0) {
+          list[i] = { ...list[i], name, channel, handle, note, updatedAt: Date.now() };
+        }
+        toast('Contact updated');
+      } else {
+        list.unshift({
+          id: Date.now(),
+          name,
+          channel,
+          handle,
+          note,
+          createdAt: Date.now(),
+          updatedAt: Date.now()
+        });
+        toast('Contact saved');
+      }
+
+      save(list);
+      closeModal();
+      render();
+    }
+
+    function deleteContact() {
+      if (!editingId) return;
+      if (!confirm('Delete this contact?')) return;
+      save(load().filter(x => x.id !== editingId));
+      toast('Contact deleted');
+      closeModal();
+      render();
+    }
+
+    $('addBtn').onclick = openAdd;
+    $('closeBtn').onclick = closeModal;
+    $('saveBtn').onclick = saveContact;
+    $('deleteBtn').onclick = deleteContact;
+    $('channel').onchange = updateChannelUI;
+    $('search').oninput = render;
+    $('modal').onclick = (e) => { if (e.target === $('modal')) closeModal(); };
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    updateChannelUI();
+    render();
+  </script>
+</body>
+</html>
